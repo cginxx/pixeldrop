@@ -1,0 +1,19 @@
+/* 小手机及以下 */
+@media (max-width: 575.98px) {
+}
+
+/* 平板竖屏及以上 */
+@media (min-width: 576px) {
+}
+
+/* 平板横屏及以上 */
+@media (min-width: 768px) {
+}
+
+/* 桌面及以上 */
+@media (min-width: 992px) {
+}
+
+/* 超大桌面及以上 */
+@media (min-width: 1200px) {
+}

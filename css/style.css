@@ -1,0 +1,449 @@
+:root {
+  --post-size: clamp(200px, 20vw, 400px);
+  --post-spacing: 1vw;
+  --mask-size: 120%;
+  --header-height: 3.7rem; /* Define a variable for header height */
+  --content-max-width: 1200px; /* Define a max width for main content areas */
+  --content-padding-mobile: 20px;
+  --content-padding-tablet: 30px;
+  --content-padding-desktop: 50px;
+}
+
+/* Universal box-sizing and font */
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "SF Pro Text", "SF Pro Icons", "Helvetica Neue", "Helvetica",
+    "Arial", sans-serif;
+  box-sizing: border-box;
+}
+
+/* Basic body styles */
+body {
+  background: #f5f5f7;
+  overflow-x: hidden; /* Ensure horizontal scroll is hidden */
+  min-width: 320px; /* Common minimum screen width for mobile */
+}
+
+body.no-scroll {
+  overflow: hidden; /* Disable scrolling when menu is open */
+}
+
+/* Material Icons styling */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* Header styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  font-size: 24px;
+  /* Removed padding here, as it will be on the wrapper now */
+  display: flex;
+  justify-content: center; /* Center the wrapper horizontally */
+  align-items: center;
+  color: #000;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  height: var(--header-height);
+}
+
+/* New wrapper for header content */
+.header-content-wrapper {
+  display: flex; /* Make it a flex container to arrange logo, icon, links */
+  justify-content: space-between; /* Space out children */
+  align-items: center;
+  width: 100%; /* Take full width of its parent (.header) initially */
+  max-width: var(--content-max-width); /* Constrain max width */
+  padding: 0 var(--content-padding-mobile); /* Apply padding inside the wrapper */
+}
+
+.header .logo img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  margin-left: 0;
+}
+
+.header .icon {
+  display: block; /* Hamburger icon shown by default on small screens */
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Navigation links - Mobile Default (hidden) */
+.header .links {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  background-color: #fafafc;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  padding-top: 2rem;
+  transition: all 0.3s ease;
+  align-items: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden; /* Ensure no horizontal scroll within the menu itself */
+}
+
+.header .links.show {
+  display: flex; /* Shown when active */
+}
+
+.header .clink {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #000;
+  padding: 5px 0;
+}
+
+/* Title and image section - Mobile Default */
+.title-img {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: calc(var(--header-height) + 20px);
+  text-align: center;
+  gap: 30px;
+  padding-bottom: 50px;
+  max-width: var(--content-max-width); /* Use max width variable */
+  margin: 0 auto; /* Center the content */
+  padding-left: var(--content-padding-mobile);
+  padding-right: var(--content-padding-mobile);
+}
+
+.title-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%; /* Ensure it's not too wide */
+}
+
+.title h1 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-top: 20px;
+  word-break: break-word; /* Prevent long words from overflowing */
+}
+
+.content {
+  margin-top: 20px;
+  width: 100%; /* Changed from 90% to 100% to fill container correctly */
+  line-height: 1.5;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+}
+
+.title-img .img img {
+  width: clamp(
+    250px,
+    90vw,
+    400px
+  ); /* Increased max-width for mobile responsiveness */
+  height: auto;
+  border-radius: 24px;
+  margin: 0;
+}
+
+/* Latest Stories section - Mobile Default */
+.girds {
+  padding: 50px 0; /* Padding is handled by inner elements */
+  max-width: var(--content-max-width); /* Constrain overall width */
+  margin: 0 auto; /* Center the section */
+}
+
+.girds h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  padding: 0 var(--content-padding-mobile); /* Use padding variable */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column on small mobiles */
+  gap: 40px;
+  justify-items: center;
+  padding: 0 var(--content-padding-mobile); /* Use padding variable */
+}
+
+.grid-item {
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px; /* Limits individual item size */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.grid-item:hover {
+  transform: translateY(-5px);
+}
+
+.grid-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.grid-item a {
+  margin-top: 20px;
+  font-weight: 600;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  text-decoration: none;
+  color: #333;
+}
+
+.grid-item span {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  color: #666;
+  font-size: 0.85rem;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+/* Footer styles - Mobile Default */
+.footer {
+  background-color: #f5f5f7;
+  padding: 60px var(--content-padding-mobile); /* Consistent padding */
+  color: #333;
+  max-width: var(--content-max-width); /* Constrain width */
+  margin: 0 auto; /* Center the footer */
+}
+
+.grid--footer {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column for footer on small screens */
+  gap: 30px;
+  max-width: 1200px; /* This can be adjusted based on desired footer max width */
+  margin: 0 auto;
+  text-align: center;
+}
+
+.logo-col {
+  text-align: center;
+}
+
+.footer-logo img {
+  width: 50px;
+  margin-bottom: 20px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.social-icon {
+  font-size: 24px;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.social-icon:hover {
+  color: #007aff;
+}
+
+.footer-heading {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111;
+  text-align: center;
+}
+
+.footer-nav,
+.contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.footer-link {
+  display: block;
+  text-decoration: none;
+  color: #555;
+  margin-bottom: 10px;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #007aff;
+}
+
+.address {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #888;
+  margin-top: 20px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* --- Breakpoint Overrides --- */
+
+/* Tablet Portrait and up */
+@media (min-width: 576px) {
+  .header-content-wrapper {
+    padding: 0 var(--content-padding-tablet); /* Update padding for tablet */
+  }
+
+  .title-img {
+    padding-left: var(--content-padding-tablet);
+    padding-right: var(--content-padding-tablet);
+  }
+
+  .girds h2 {
+    padding: 0 var(--content-padding-tablet);
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    ); /* Allow 2+ columns */
+    padding: 0 var(--content-padding-tablet); /* Slightly wider padding */
+  }
+
+  .footer {
+    padding: 60px var(--content-padding-tablet);
+  }
+
+  .grid--footer {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for footer */
+    text-align: left; /* Align footer text to left */
+  }
+
+  .logo-col,
+  .footer-heading,
+  .footer-nav,
+  .contacts,
+  .social-links,
+  .copyright {
+    text-align: left; /* Align content within columns */
+  }
+
+  .social-links {
+    justify-content: flex-start; /* Align social links left */
+  }
+}
+
+/* Tablet Landscape and up */
+@media (min-width: 768px) {
+  .header .icon {
+    display: none; /* Hide hamburger icon on larger screens */
+  }
+
+  .header .links {
+    display: flex; /* Show navigation links as a row */
+    position: static; /* Reset positioning */
+    flex-direction: row;
+    height: auto;
+    padding-top: 0;
+    width: auto;
+    background-color: transparent; /* Remove background */
+    align-items: center;
+    gap: 20px;
+    overflow-y: visible;
+  }
+
+  .header .clink {
+    margin: 0;
+    font-size: medium;
+  }
+
+  .title-img {
+    flex-direction: row; /* Layout title and image side-by-side */
+    justify-content: space-between;
+    padding-left: var(--content-padding-desktop);
+    padding-right: var(--content-padding-desktop);
+  }
+
+  .title-con {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 50%;
+  }
+
+  .title h1 {
+    font-size: clamp(2.5rem, 4vw, 3rem);
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .girds h2 {
+    text-align: left; /* Align heading to the left */
+    padding: 0 var(--content-padding-desktop); /* Ensure alignment with grid container */
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(280px, 1fr)
+    ); /* More items in a row */
+    padding: 0 var(--content-padding-desktop); /* Wider padding for content */
+  }
+
+  .footer {
+    padding: 60px var(--content-padding-desktop);
+  }
+
+  .grid--footer {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 992px) {
+  .header .logo img {
+    margin-left: 20px; /* Restore original margin for logo */
+  }
+
+  .girds h2 {
+    padding: 0 var(--content-padding-desktop); /* Keep consistent padding */
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr); /* Force 3 columns */
+    padding: 0 var(--content-padding-desktop); /* Keep consistent padding */
+  }
+}
+
+/* Large Desktop and up */
+@media (min-width: 1200px) {
+  .grid--footer {
+    grid-template-columns: repeat(
+      5,
+      1fr
+    ); /* Five columns for very large screens */
+  }
+}
